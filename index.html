@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#10100f" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="apple-touch-icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MCU Tracker" />
+    <title>MCU Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div>
+          <div class="eyebrow">MARVEL CINEMATIC UNIVERSE</div>
+          <h1>MCU Tracker</h1>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="resetBtn" class="text-button" type="button">
+          Reset progress
+        </button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <p class="kicker">YOUR MARVEL WATCHLIST</p>
+          <h2>Track the saga.<br /><span>One title at a time.</span></h2>
+          <p class="intro">
+            A lightweight, local-first checklist for MCU movies and series. Your
+            progress stays in this browser using IndexedDB—no account required.
+          </p>
+        </div>
+        <div class="progress-card">
+          <div class="progress-top">
+            <span>Overall progress</span
+            ><strong id="progressText">0 / 64</strong>
+          </div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+          <div class="progress-meta">
+            <span id="percentText">0%</span
+            ><span id="remainingText">64 remaining</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Filters">
+        <div class="control-row">
+          <div class="segmented" role="group" aria-label="Content type">
+            <button class="filter active" data-type="all">All</button>
+            <button class="filter" data-type="movie">Movies</button>
+            <button class="filter" data-type="show">Shows</button>
+          </div>
+          <div class="segmented" role="group" aria-label="Completion status">
+            <button class="status-filter active" data-status="all">All</button>
+            <button class="status-filter" data-status="unchecked">
+              Unchecked
+            </button>
+            <button class="status-filter" data-status="checked">Checked</button>
+          </div>
+          <label class="search"
+            ><span>⌕</span
+            ><input
+              id="search"
+              type="search"
+              placeholder="Search titles…"
+              autocomplete="off"
+          /></label>
+          <label class="sort-select"
+            ><span>Sort</span
+            ><select id="sort">
+              <option value="release">Release date</option>
+              <option value="story">Chronological / story order</option>
+              <option value="phase">Phase order</option>
+            </select></label
+          >
+        </div>
+      </section>
+
+      <section class="summary-row">
+        <div><span id="visibleCount">64</span> titles shown</div>
+        <div class="legend">
+          <span class="dot movie-dot"></span> Movie
+          <span class="dot show-dot"></span> Show
+        </div>
+      </section>
+
+      <section id="list" class="list" aria-live="polite"></section>
+      <div id="empty" class="empty" hidden>
+        <div class="empty-icon">✦</div>
+        <h3>Nothing here.</h3>
+        <p>Try another filter or search term.</p>
+      </div>
+    </main>
+
+    <footer>
+      <span>MCU Tracker</span>
+      <span>Progress is stored locally in IndexedDB.</span>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

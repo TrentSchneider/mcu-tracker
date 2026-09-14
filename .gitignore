@@ -1,0 +1,46 @@
+# ==========================================
+# Visual Studio Code (VS Code) Files
+# ==========================================
+# Prevents VS Code settings and workspaces from being committed
+.vscode/**
+*.code-workspace
+*.code-search-settings
+
+# ==========================================
+# macOS Files
+# ==========================================
+# Avoid committing macOS desktop system cache
+.DS_Store
+**/.DS_Store
+.**_DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+**/Trashes
+com.apple.timemachine.donotshare
+**/.com.apple.timemachine.donotshare
+*.swp
+*~
+
+# ==========================================
+# Windows 11 / Windows Files
+# ==========================================
+# Windows Explorer cache and shortcuts
+Thumbs.db
+**/Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+**/ehthumbs*.db
+desktop.ini
+**/desktop.ini
+*.lnk
+**/*.lnk
+$Recycle.Bin/
+**/$Recycle.Bin/
+pagefile.sys
+**/pagefile.sys
+*.vbs
+*.bat
+*.cmd
+*.ini
