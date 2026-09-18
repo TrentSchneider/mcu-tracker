@@ -1,12 +1,15 @@
 const DB_NAME = "mcu-tracker";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const STORE = "progress";
+const SETTINGS_STORE = "settings";
+const SETTINGS_KEY = "ui";
 
 const state = {
   type: "all",
   status: "all",
   search: "",
   sort: "release",
+  filtersOpen: false,
   progress: new Set()
 };
 
@@ -16,6 +19,8 @@ function openDB() {
     req.onupgradeneeded = () => {
       const db = req.result;
       if (!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE);
+      if (!db.objectStoreNames.contains(SETTINGS_STORE))
+        db.createObjectStore(SETTINGS_STORE);
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
@@ -48,6 +53,48 @@ async function clearProgress() {
     tx.objectStore(STORE).clear();
     tx.oncomplete = resolve;
     tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function getSettings() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(SETTINGS_STORE, "readonly");
+    const req = tx.objectStore(SETTINGS_STORE).get(SETTINGS_KEY);
+    req.onsuccess = () => resolve(req.result || {});
+    req.onerror = () => reject(req.error);
+  });
+}
+async function saveSettings() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(SETTINGS_STORE, "readwrite");
+    tx.objectStore(SETTINGS_STORE).put(
+      {
+        type: state.type,
+        status: state.status,
+        sort: state.sort,
+        filtersOpen: state.filtersOpen
+      },
+      SETTINGS_KEY
+    );
+    tx.oncomplete = resolve;
+    tx.onerror = () => reject(tx.error);
+  });
+}
+function setFiltersToggle(open) {
+  state.filtersOpen = open;
+  const toggle = document.getElementById("filtersToggle");
+  const panel = document.getElementById("filtersPanel");
+  if (toggle) toggle.setAttribute("aria-expanded", String(open));
+  if (panel) panel.classList.toggle("is-open", open);
+}
+function setupFiltersToggle() {
+  const toggle = document.getElementById("filtersToggle");
+  if (!toggle) return;
+  toggle.addEventListener("click", () => {
+    setFiltersToggle(!state.filtersOpen);
+    saveSettings();
   });
 }
 
@@ -152,6 +199,7 @@ document.querySelectorAll(".filter").forEach(btn =>
     btn.classList.add("active");
     state.type = btn.dataset.type;
     render();
+    saveSettings();
   })
 );
 document.querySelectorAll(".status-filter").forEach(btn =>
@@ -162,15 +210,29 @@ document.querySelectorAll(".status-filter").forEach(btn =>
     btn.classList.add("active");
     state.status = btn.dataset.status;
     render();
+    saveSettings();
   })
 );
-document.getElementById("search").addEventListener("input", e => {
-  state.search = e.target.value;
-  render();
-});
+[document.getElementById("search"), document.getElementById("searchDesktop")]
+  .filter(Boolean)
+  .forEach(input => {
+    input.addEventListener("input", e => {
+      state.search = e.target.value;
+      [
+        document.getElementById("search"),
+        document.getElementById("searchDesktop")
+      ]
+        .filter(other => other && other !== input)
+        .forEach(other => {
+          other.value = state.search;
+        });
+      render();
+    });
+  });
 document.getElementById("sort").addEventListener("change", e => {
   state.sort = e.target.value;
   render();
+  saveSettings();
 });
 document.getElementById("resetBtn").addEventListener("click", async () => {
   if (
@@ -183,8 +245,29 @@ document.getElementById("resetBtn").addEventListener("click", async () => {
   }
 });
 
+setupFiltersToggle();
+
 (async () => {
-  state.progress = await getAllProgress();
+  const [progress, settings] = await Promise.all([
+    getAllProgress(),
+    getSettings()
+  ]);
+  state.progress = progress;
+  state.type = settings.type || "all";
+  state.status = settings.status || "all";
+  state.sort = settings.sort || "release";
+  state.filtersOpen = Boolean(settings.filtersOpen);
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(b => b.classList.toggle("active", b.dataset.type === state.type));
+  document
+    .querySelectorAll(".status-filter")
+    .forEach(b =>
+      b.classList.toggle("active", b.dataset.status === state.status)
+    );
+  document.getElementById("sort").value = state.sort;
+  setFiltersToggle(state.filtersOpen);
   updateStats();
   render();
 })();

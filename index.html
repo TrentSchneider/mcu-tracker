@@ -30,7 +30,7 @@
 
     <main class="wrap">
       <section class="hero">
-        <div>
+        <div class="hero-copy">
           <p class="kicker">YOUR MARVEL WATCHLIST</p>
           <h2>Track the saga.<br /><span>One title at a time.</span></h2>
           <p class="intro">
@@ -38,6 +38,9 @@
             progress stays in this browser using IndexedDB—no account required.
           </p>
         </div>
+      </section>
+
+      <section class="progress-sticky">
         <div class="progress-card">
           <div class="progress-top">
             <span>Overall progress</span
@@ -49,39 +52,63 @@
             ><span id="remainingText">64 remaining</span>
           </div>
         </div>
-      </section>
 
-      <section class="controls" aria-label="Filters">
-        <div class="control-row">
-          <div class="segmented" role="group" aria-label="Content type">
-            <button class="filter active" data-type="all">All</button>
-            <button class="filter" data-type="movie">Movies</button>
-            <button class="filter" data-type="show">Shows</button>
+        <label class="search"
+          ><span>⌕</span
+          ><input
+            id="search"
+            type="search"
+            placeholder="Search titles…"
+            autocomplete="off"
+        /></label>
+
+        <button
+          id="filtersToggle"
+          class="filters-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="filtersPanel"
+        >
+          <span>Filters &amp; Sort</span
+          ><span class="filters-toggle-icon" aria-hidden="true">+</span>
+        </button>
+
+        <section id="filtersPanel" class="controls" aria-label="Filters">
+          <div class="control-row">
+            <div class="segmented" role="group" aria-label="Content type">
+              <button class="filter active" data-type="all">All</button>
+              <button class="filter" data-type="movie">Movies</button>
+              <button class="filter" data-type="show">Shows</button>
+            </div>
+            <div class="segmented" role="group" aria-label="Completion status">
+              <button class="status-filter active" data-status="all">
+                All
+              </button>
+              <button class="status-filter" data-status="unchecked">
+                Unchecked
+              </button>
+              <button class="status-filter" data-status="checked">
+                Checked
+              </button>
+            </div>
+            <label class="search desktop-search"
+              ><span>⌕</span
+              ><input
+                id="searchDesktop"
+                type="search"
+                placeholder="Search titles…"
+                autocomplete="off"
+            /></label>
+            <label class="sort-select"
+              ><span>Sort</span
+              ><select id="sort">
+                <option value="release">Release date</option>
+                <option value="story">Chronological / story order</option>
+                <option value="phase">Phase order</option>
+              </select></label
+            >
           </div>
-          <div class="segmented" role="group" aria-label="Completion status">
-            <button class="status-filter active" data-status="all">All</button>
-            <button class="status-filter" data-status="unchecked">
-              Unchecked
-            </button>
-            <button class="status-filter" data-status="checked">Checked</button>
-          </div>
-          <label class="search"
-            ><span>⌕</span
-            ><input
-              id="search"
-              type="search"
-              placeholder="Search titles…"
-              autocomplete="off"
-          /></label>
-          <label class="sort-select"
-            ><span>Sort</span
-            ><select id="sort">
-              <option value="release">Release date</option>
-              <option value="story">Chronological / story order</option>
-              <option value="phase">Phase order</option>
-            </select></label
-          >
-        </div>
+        </section>
       </section>
 
       <section class="summary-row">

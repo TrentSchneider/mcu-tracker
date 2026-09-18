@@ -71,8 +71,8 @@ body {
   font-weight: 800;
   transform: rotate(45deg);
 }
-/* .brand-mark::first-letter {
-} */
+.brand-mark::first-letter {
+}
 .brand-mark {
   box-shadow:
     inset 0 0 0 3px var(--bg),
@@ -111,13 +111,15 @@ h1 {
   max-width: 1180px;
   margin: auto;
   padding: 55px 28px 70px;
+  position: relative;
 }
 .hero {
-  display: grid;
-  grid-template-columns: 1.35fr 0.65fr;
-  gap: 50px;
-  align-items: end;
-  padding-bottom: 48px;
+  display: block;
+  padding: 0 420px 30px 0;
+  min-height: 245px;
+}
+.hero-copy {
+  max-width: 760px;
 }
 .kicker {
   margin: 0 0 14px;
@@ -136,6 +138,27 @@ h1 {
   line-height: 1.7;
   margin: 22px 0 0;
   font-size: 15px;
+}
+.progress-sticky {
+  max-width: none;
+  margin: 0 0 48px;
+}
+.progress-card {
+  position: absolute;
+  top: 195px;
+  right: 28px;
+  width: 390px;
+  max-width: calc(100% - 56px);
+  margin: 0;
+}
+.progress-sticky > .search {
+  display: none;
+}
+.progress-sticky > .filters-toggle {
+  display: none;
+}
+.progress-sticky > .controls {
+  margin-top: 0;
 }
 .progress-card {
   background: linear-gradient(145deg, var(--panel2), #151513);
@@ -180,7 +203,7 @@ h1 {
   color: var(--accent2);
 }
 .controls {
-  position: sticky;
+  position: static;
   top: 0;
   z-index: 10;
   background: rgba(16, 16, 15, 0.9);
@@ -427,20 +450,11 @@ footer {
   display: flex;
   justify-content: space-between;
 }
-@media (max-width: 860px) {
-  .control-row {
-    grid-template-columns: 1fr 1fr;
-  }
-  .search {
-    grid-column: 1 / -1;
-  }
-  .sort-select {
-    grid-column: 1 / -1;
-    justify-content: space-between;
-  }
+
+@media (max-width: 995px) {
   .hero {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    padding: 0 0 18px;
+    min-height: 0;
   }
   .control-row {
     grid-template-columns: 1fr;
@@ -450,6 +464,95 @@ footer {
   }
   .search {
     min-height: 42px;
+  }
+  .sort-select {
+    justify-content: center;
+    text-align: center;
+  }
+  .progress-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    margin: 0 0 14px;
+    padding: 0;
+    background: var(--bg);
+    max-width: none;
+  }
+  .progress-card {
+    position: static;
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+  .progress-sticky > .search {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .progress-sticky > .filters-toggle {
+    display: flex;
+  }
+  .progress-sticky > .controls {
+    display: none;
+    margin-top: 0;
+    border-top: 0;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+  }
+  .progress-sticky > .controls.is-open {
+    display: block;
+  }
+  .desktop-search {
+    display: none;
+  }
+  .search {
+    position: relative;
+  }
+  .search span {
+    position: absolute;
+    left: 14px;
+  }
+  .search input {
+    text-align: center;
+  }
+  .search input::placeholder {
+    text-align: center;
+  }
+  .filters-toggle {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 46px;
+    padding: 11px 14px;
+    margin: 8px 0 0;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    font: 700 12px inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .filters-toggle-icon {
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 0.16s ease;
+  }
+  .filters-toggle[aria-expanded="true"] .filters-toggle-icon {
+    transform: rotate(45deg);
+  }
+  .control-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 8px;
+  }
+  .sort-select select {
+    text-align: center;
+    text-align-last: center;
+    padding-right: 0;
+    padding-left: 0;
   }
   .item {
     grid-template-columns: 35px 1fr 30px;
@@ -462,6 +565,7 @@ footer {
     font-size: 56px;
   }
 }
+
 @media (max-width: 500px) {
   .site-header {
     padding: 22px 18px;
