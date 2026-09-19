@@ -44,12 +44,29 @@
         <div class="progress-card">
           <div class="progress-top">
             <span>Overall progress</span
-            ><strong id="progressText">0 / 64</strong>
+            ><strong id="progressText">0 / 94</strong>
           </div>
           <div class="progress-track"><div id="progressBar"></div></div>
           <div class="progress-meta">
             <span id="percentText">0%</span
-            ><span id="remainingText">64 remaining</span>
+            ><span id="remainingText">94 remaining</span>
+          </div>
+          <div class="continue-wrap">
+            <button
+              id="continueWatchingBtn"
+              class="continue-button"
+              type="button"
+              disabled
+            >
+              <span>Continue watching</span
+              ><span class="continue-count" id="continueCount">0</span>
+            </button>
+            <div
+              id="continuePopover"
+              class="continue-popover"
+              role="dialog"
+              aria-label="Continue watching"
+            ></div>
           </div>
         </div>
 
@@ -69,26 +86,44 @@
           aria-expanded="false"
           aria-controls="filtersPanel"
         >
-          <span>Filters &amp; Sort</span
+          <span class="filters-toggle-label">Filters &amp; Sort</span
+          ><span class="filters-active-indicator" aria-hidden="true">•</span
           ><span class="filters-toggle-icon" aria-hidden="true">+</span>
         </button>
 
         <section id="filtersPanel" class="controls" aria-label="Filters">
           <div class="control-row">
-            <div class="segmented" role="group" aria-label="Content type">
+            <div
+              class="segmented type-group"
+              role="group"
+              aria-label="Content type"
+            >
+              <span class="filter-label filter-label-type" aria-hidden="true"
+                >Type</span
+              >
               <button class="filter active" data-type="all">All</button>
               <button class="filter" data-type="movie">Movies</button>
               <button class="filter" data-type="show">Shows</button>
             </div>
-            <div class="segmented" role="group" aria-label="Completion status">
+            <div
+              class="segmented status-group"
+              role="group"
+              aria-label="Completion status"
+            >
+              <span class="filter-label filter-label-status" aria-hidden="true"
+                >Status</span
+              >
               <button class="status-filter active" data-status="all">
                 All
               </button>
-              <button class="status-filter" data-status="unchecked">
-                Unchecked
+              <button class="status-filter" data-status="unwatched">
+                Unwatched
               </button>
-              <button class="status-filter" data-status="checked">
-                Checked
+              <button class="status-filter" data-status="in-progress">
+                In Progress
+              </button>
+              <button class="status-filter" data-status="watched">
+                Watched
               </button>
             </div>
             <label class="search desktop-search"
@@ -109,14 +144,16 @@
             >
           </div>
         </section>
-      </section>
 
-      <section class="summary-row">
-        <div><span id="visibleCount">64</span> titles shown</div>
-        <div class="legend">
-          <span class="dot movie-dot"></span> Movie
-          <span class="dot show-dot"></span> Show
-        </div>
+        <section class="summary-row">
+          <div id="summaryCountText">
+            <span id="visibleCount">94</span> titles shown
+          </div>
+          <div class="legend">
+            <span class="dot movie-dot"></span> Movie
+            <span class="dot show-dot"></span> Show
+          </div>
+        </section>
       </section>
 
       <section id="list" class="list" aria-live="polite"></section>
@@ -133,6 +170,7 @@
     </footer>
 
     <script src="data.js"></script>
+    <script src="episodes.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

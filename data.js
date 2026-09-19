@@ -525,7 +525,8 @@ window.MCU_ITEMS = [
     order: 1,
     releaseDate: "2021-01-15",
     storyOrder: 52,
-    phaseOrder: 4001
+    phaseOrder: 4001,
+    episodeCount: 9
   },
   {
     id: "series-02",
@@ -537,7 +538,8 @@ window.MCU_ITEMS = [
     order: 2,
     releaseDate: "2021-03-19",
     storyOrder: 53,
-    phaseOrder: 4002
+    phaseOrder: 4002,
+    episodeCount: 6
   },
   {
     id: "series-03",
@@ -549,7 +551,8 @@ window.MCU_ITEMS = [
     order: 3,
     releaseDate: "2021-06-09",
     storyOrder: 54,
-    phaseOrder: 4003
+    phaseOrder: 4003,
+    episodeCount: 6
   },
   {
     id: "series-04",
@@ -561,7 +564,8 @@ window.MCU_ITEMS = [
     order: 4,
     releaseDate: "2021-08-11",
     storyOrder: 55,
-    phaseOrder: 4004
+    phaseOrder: 4004,
+    episodeCount: 9
   },
   {
     id: "series-05",
@@ -573,7 +577,8 @@ window.MCU_ITEMS = [
     order: 5,
     releaseDate: "2021-11-24",
     storyOrder: 59,
-    phaseOrder: 4005
+    phaseOrder: 4005,
+    episodeCount: 6
   },
   {
     id: "series-06",
@@ -585,7 +590,8 @@ window.MCU_ITEMS = [
     order: 6,
     releaseDate: "2022-03-30",
     storyOrder: 61,
-    phaseOrder: 4006
+    phaseOrder: 4006,
+    episodeCount: 6
   },
   {
     id: "series-07",
@@ -597,7 +603,8 @@ window.MCU_ITEMS = [
     order: 7,
     releaseDate: "2022-06-08",
     storyOrder: 62,
-    phaseOrder: 4007
+    phaseOrder: 4007,
+    episodeCount: 6
   },
   {
     id: "series-08",
@@ -609,7 +616,8 @@ window.MCU_ITEMS = [
     order: 8,
     releaseDate: "2022-08-18",
     storyOrder: 63,
-    phaseOrder: 4008
+    phaseOrder: 4008,
+    episodeCount: 9
   },
   {
     id: "series-09",
@@ -621,7 +629,8 @@ window.MCU_ITEMS = [
     order: 9,
     releaseDate: "2023-06-21",
     storyOrder: 66,
-    phaseOrder: 5009
+    phaseOrder: 5009,
+    episodeCount: 6
   },
   {
     id: "series-10",
@@ -633,7 +642,8 @@ window.MCU_ITEMS = [
     order: 10,
     releaseDate: "2023-10-05",
     storyOrder: 70,
-    phaseOrder: 5010
+    phaseOrder: 5010,
+    episodeCount: 6
   },
   {
     id: "series-11",
@@ -645,7 +655,8 @@ window.MCU_ITEMS = [
     order: 11,
     releaseDate: "2023-12-22",
     storyOrder: 73,
-    phaseOrder: 5011
+    phaseOrder: 5011,
+    episodeCount: 9
   },
   {
     id: "series-12",
@@ -657,7 +668,8 @@ window.MCU_ITEMS = [
     order: 12,
     releaseDate: "2024-01-09",
     storyOrder: 71,
-    phaseOrder: 5012
+    phaseOrder: 5012,
+    episodeCount: 5
   },
   {
     id: "series-13",
@@ -669,7 +681,8 @@ window.MCU_ITEMS = [
     order: 13,
     releaseDate: "2024-09-18",
     storyOrder: 74,
-    phaseOrder: 5013
+    phaseOrder: 5013,
+    episodeCount: 9
   },
   {
     id: "series-14",
@@ -681,7 +694,8 @@ window.MCU_ITEMS = [
     order: 14,
     releaseDate: "2024-12-22",
     storyOrder: 75,
-    phaseOrder: 5014
+    phaseOrder: 5014,
+    episodeCount: 8
   },
   {
     id: "series-15",
@@ -693,7 +707,8 @@ window.MCU_ITEMS = [
     order: 15,
     releaseDate: "2025-03-04",
     storyOrder: 77,
-    phaseOrder: 5015
+    phaseOrder: 5015,
+    episodeCount: 9
   },
   {
     id: "series-16",
@@ -705,7 +720,8 @@ window.MCU_ITEMS = [
     order: 16,
     releaseDate: "2025-06-24",
     storyOrder: 78,
-    phaseOrder: 5016
+    phaseOrder: 5016,
+    episodeCount: 6
   },
   {
     id: "series-17",
@@ -717,7 +733,8 @@ window.MCU_ITEMS = [
     order: 17,
     releaseDate: "2025-08-01",
     storyOrder: 79,
-    phaseOrder: 5017
+    phaseOrder: 5017,
+    episodeCount: 4
   },
   {
     id: "series-18",
@@ -729,7 +746,8 @@ window.MCU_ITEMS = [
     order: 18,
     releaseDate: "2025-09-24",
     storyOrder: 80,
-    phaseOrder: 5018
+    phaseOrder: 5018,
+    episodeCount: 4
   },
   {
     id: "series-19",
@@ -741,7 +759,8 @@ window.MCU_ITEMS = [
     order: 19,
     releaseDate: "2026-01-01",
     storyOrder: 81,
-    phaseOrder: 6019
+    phaseOrder: 6019,
+    episodeCount: 8
   },
   {
     id: "series-20",
@@ -753,7 +772,8 @@ window.MCU_ITEMS = [
     order: 20,
     releaseDate: "2026-03-10",
     storyOrder: 82,
-    phaseOrder: 6020
+    phaseOrder: 6020,
+    episodeCount: 9
   },
   {
     id: "series-21",
@@ -778,7 +798,8 @@ window.MCU_ITEMS = [
     order: 22,
     releaseDate: "2015-01-06",
     storyOrder: 1,
-    phaseOrder: 99001
+    phaseOrder: 99001,
+    episodeCount: 8
   },
   {
     id: "series-23",
@@ -791,7 +812,8 @@ window.MCU_ITEMS = [
     order: 23,
     releaseDate: "2016-01-19",
     storyOrder: 2,
-    phaseOrder: 99002
+    phaseOrder: 99002,
+    episodeCount: 10
   },
   {
     id: "series-24",
@@ -804,7 +826,8 @@ window.MCU_ITEMS = [
     order: 24,
     releaseDate: "2013-09-24",
     storyOrder: 10,
-    phaseOrder: 99010
+    phaseOrder: 99010,
+    episodeCount: 22
   },
   {
     id: "series-25",
@@ -817,7 +840,8 @@ window.MCU_ITEMS = [
     order: 25,
     releaseDate: "2014-09-23",
     storyOrder: 13,
-    phaseOrder: 99013
+    phaseOrder: 99013,
+    episodeCount: 22
   },
   {
     id: "series-26",
@@ -830,7 +854,8 @@ window.MCU_ITEMS = [
     order: 26,
     releaseDate: "2015-09-29",
     storyOrder: 19,
-    phaseOrder: 99019
+    phaseOrder: 99019,
+    episodeCount: 22
   },
   {
     id: "series-27",
@@ -843,7 +868,8 @@ window.MCU_ITEMS = [
     order: 27,
     releaseDate: "2016-09-20",
     storyOrder: 26,
-    phaseOrder: 99026
+    phaseOrder: 99026,
+    episodeCount: 22
   },
   {
     id: "series-28",
@@ -856,7 +882,8 @@ window.MCU_ITEMS = [
     order: 28,
     releaseDate: "2017-12-01",
     storyOrder: 39,
-    phaseOrder: 99039
+    phaseOrder: 99039,
+    episodeCount: 22
   },
   {
     id: "series-29",
@@ -869,7 +896,8 @@ window.MCU_ITEMS = [
     order: 29,
     releaseDate: "2019-05-10",
     storyOrder: 44,
-    phaseOrder: 99044
+    phaseOrder: 99044,
+    episodeCount: 13
   },
   {
     id: "series-30",
@@ -882,7 +910,8 @@ window.MCU_ITEMS = [
     order: 30,
     releaseDate: "2020-05-27",
     storyOrder: 46,
-    phaseOrder: 99046
+    phaseOrder: 99046,
+    episodeCount: 13
   },
   {
     id: "series-31",
@@ -895,7 +924,8 @@ window.MCU_ITEMS = [
     order: 31,
     releaseDate: "2015-04-10",
     storyOrder: 16,
-    phaseOrder: 99016
+    phaseOrder: 99016,
+    episodeCount: 13
   },
   {
     id: "series-32",
@@ -908,7 +938,8 @@ window.MCU_ITEMS = [
     order: 32,
     releaseDate: "2015-11-20",
     storyOrder: 17,
-    phaseOrder: 99017
+    phaseOrder: 99017,
+    episodeCount: 13
   },
   {
     id: "series-33",
@@ -921,7 +952,8 @@ window.MCU_ITEMS = [
     order: 33,
     releaseDate: "2016-03-18",
     storyOrder: 21,
-    phaseOrder: 99021
+    phaseOrder: 99021,
+    episodeCount: 13
   },
   {
     id: "series-34",
@@ -934,7 +966,8 @@ window.MCU_ITEMS = [
     order: 34,
     releaseDate: "2016-09-30",
     storyOrder: 22,
-    phaseOrder: 99022
+    phaseOrder: 99022,
+    episodeCount: 13
   },
   {
     id: "series-35",
@@ -947,7 +980,8 @@ window.MCU_ITEMS = [
     order: 35,
     releaseDate: "2017-03-17",
     storyOrder: 23,
-    phaseOrder: 99023
+    phaseOrder: 99023,
+    episodeCount: 13
   },
   {
     id: "series-36",
@@ -960,7 +994,8 @@ window.MCU_ITEMS = [
     order: 36,
     releaseDate: "2017-08-18",
     storyOrder: 24,
-    phaseOrder: 99024
+    phaseOrder: 99024,
+    episodeCount: 8
   },
   {
     id: "series-37",
@@ -973,7 +1008,8 @@ window.MCU_ITEMS = [
     order: 37,
     releaseDate: "2017-11-17",
     storyOrder: 28,
-    phaseOrder: 99028
+    phaseOrder: 99028,
+    episodeCount: 13
   },
   {
     id: "series-38",
@@ -986,7 +1022,8 @@ window.MCU_ITEMS = [
     order: 38,
     releaseDate: "2018-03-08",
     storyOrder: 29,
-    phaseOrder: 99029
+    phaseOrder: 99029,
+    episodeCount: 13
   },
   {
     id: "series-39",
@@ -999,7 +1036,8 @@ window.MCU_ITEMS = [
     order: 39,
     releaseDate: "2018-06-22",
     storyOrder: 30,
-    phaseOrder: 99030
+    phaseOrder: 99030,
+    episodeCount: 13
   },
   {
     id: "series-40",
@@ -1012,7 +1050,8 @@ window.MCU_ITEMS = [
     order: 40,
     releaseDate: "2018-09-07",
     storyOrder: 31,
-    phaseOrder: 99031
+    phaseOrder: 99031,
+    episodeCount: 10
   },
   {
     id: "series-41",
@@ -1025,7 +1064,8 @@ window.MCU_ITEMS = [
     order: 41,
     releaseDate: "2018-10-19",
     storyOrder: 32,
-    phaseOrder: 99032
+    phaseOrder: 99032,
+    episodeCount: 13
   },
   {
     id: "series-42",
@@ -1038,7 +1078,8 @@ window.MCU_ITEMS = [
     order: 42,
     releaseDate: "2019-01-18",
     storyOrder: 49,
-    phaseOrder: 99049
+    phaseOrder: 99049,
+    episodeCount: 13
   },
   {
     id: "series-43",
@@ -1051,7 +1092,8 @@ window.MCU_ITEMS = [
     order: 43,
     releaseDate: "2019-06-14",
     storyOrder: 48,
-    phaseOrder: 99048
+    phaseOrder: 99048,
+    episodeCount: 13
   },
   {
     id: "series-44",
@@ -1064,7 +1106,8 @@ window.MCU_ITEMS = [
     order: 44,
     releaseDate: "2017-09-29",
     storyOrder: 34,
-    phaseOrder: 99034
+    phaseOrder: 99034,
+    episodeCount: 8
   },
   {
     id: "series-45",
@@ -1077,7 +1120,8 @@ window.MCU_ITEMS = [
     order: 45,
     releaseDate: "2017-11-21",
     storyOrder: 35,
-    phaseOrder: 99035
+    phaseOrder: 99035,
+    episodeCount: 10
   },
   {
     id: "series-46",
@@ -1090,7 +1134,8 @@ window.MCU_ITEMS = [
     order: 46,
     releaseDate: "2018-12-21",
     storyOrder: 40,
-    phaseOrder: 99040
+    phaseOrder: 99040,
+    episodeCount: 13
   },
   {
     id: "series-47",
@@ -1103,7 +1148,8 @@ window.MCU_ITEMS = [
     order: 47,
     releaseDate: "2019-12-13",
     storyOrder: 47,
-    phaseOrder: 99047
+    phaseOrder: 99047,
+    episodeCount: 10
   },
   {
     id: "series-48",
@@ -1116,7 +1162,8 @@ window.MCU_ITEMS = [
     order: 48,
     releaseDate: "2018-06-07",
     storyOrder: 36,
-    phaseOrder: 99036
+    phaseOrder: 99036,
+    episodeCount: 10
   },
   {
     id: "series-49",
@@ -1129,7 +1176,8 @@ window.MCU_ITEMS = [
     order: 49,
     releaseDate: "2019-04-04",
     storyOrder: 41,
-    phaseOrder: 99041
+    phaseOrder: 99041,
+    episodeCount: 10
   },
   {
     id: "series-50",
@@ -1142,7 +1190,8 @@ window.MCU_ITEMS = [
     order: 50,
     releaseDate: "2022-08-10",
     storyOrder: 58,
-    phaseOrder: 99058
+    phaseOrder: 99058,
+    episodeCount: 5
   },
   {
     id: "series-51",
@@ -1155,6 +1204,7 @@ window.MCU_ITEMS = [
     order: 51,
     releaseDate: "2023-09-06",
     storyOrder: 67,
-    phaseOrder: 99067
+    phaseOrder: 99067,
+    episodeCount: 5
   }
 ];
