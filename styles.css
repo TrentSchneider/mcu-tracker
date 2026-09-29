@@ -201,7 +201,6 @@ h1 {
   margin-top: 14px;
 }
 .continue-button {
-  touch-action: manipulation;
   width: 100%;
   display: flex;
   align-items: center;
@@ -254,7 +253,6 @@ h1 {
   display: block;
 }
 .continue-item {
-  touch-action: manipulation;
   width: 100%;
   display: grid;
   grid-template-columns: 24px 1fr;
@@ -316,7 +314,6 @@ h1 {
   display: none;
 }
 .segmented button {
-  touch-action: manipulation;
   border: 0;
   background: transparent;
   color: var(--muted);
@@ -419,14 +416,16 @@ h1 {
 .show-dot {
   background: var(--show);
 }
-.list {
+.list,
+.list * {
   touch-action: manipulation;
+}
+.list {
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
 .item {
-  touch-action: manipulation;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -445,17 +444,14 @@ h1 {
 }
 .item-main {
   min-width: 0;
-  touch-action: manipulation;
 }
 .title-line {
-  touch-action: manipulation;
   display: flex;
   align-items: center;
   gap: 10px;
   min-width: 0;
 }
 .title {
-  touch-action: manipulation;
   font: 700 18px "Playfair Display";
   white-space: nowrap;
   overflow: hidden;
@@ -478,7 +474,6 @@ h1 {
   border-color: #4c604c;
 }
 .meta {
-  touch-action: manipulation;
   display: flex;
   gap: 13px;
   margin-top: 6px;
@@ -489,7 +484,6 @@ h1 {
   color: var(--accent);
 }
 .episode-meta {
-  touch-action: manipulation;
   color: #9a958b;
 }
 .item-action {
@@ -497,7 +491,6 @@ h1 {
   align-items: center;
 }
 .status-button {
-  touch-action: manipulation;
   appearance: none;
   width: 30px;
   height: 30px;
@@ -539,7 +532,6 @@ h1 {
   display: none;
 }
 .episodes-toggle {
-  touch-action: manipulation;
   margin-top: 10px;
   border: 0;
   background: none;
@@ -589,7 +581,6 @@ h1 {
   border-bottom: 0;
 }
 .episode-status {
-  touch-action: manipulation;
   appearance: none;
   width: 22px;
   height: 22px;
@@ -639,7 +630,6 @@ h1 {
 .filters-toggle {
   position: relative;
   isolation: isolate;
-  touch-action: manipulation;
 }
 .filters-toggle-icon {
   margin-left: auto;
@@ -833,7 +823,6 @@ footer {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     cursor: pointer;
-    touch-action: manipulation;
   }
   .filters-toggle-icon {
     font-size: 20px;
