@@ -17,6 +17,10 @@
 * {
   box-sizing: border-box;
 }
+html,
+body {
+  touch-action: manipulation;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -363,7 +367,7 @@ h1 {
   border: 0;
   outline: 0;
   color: var(--ink);
-  font: 14px inherit;
+  font: 16px inherit;
   padding: 10px 0;
 }
 .search input::placeholder {
@@ -432,20 +436,6 @@ h1 {
   align-items: center;
   gap: 10px;
   min-width: 0;
-}
-.status-mark {
-  width: 20px;
-  flex: 0 0 20px;
-  color: transparent;
-  font-size: 16px;
-  line-height: 1;
-  text-align: center;
-}
-.status-in-progress .status-mark {
-  color: var(--accent);
-}
-.status-watched .status-mark {
-  color: var(--accent);
 }
 .title {
   font: 700 18px "Playfair Display";
@@ -523,6 +513,9 @@ h1 {
 }
 .status-button.watched:hover {
   background: var(--accent2);
+}
+.item.episodes-expanded .item-action .status-button {
+  display: none;
 }
 .episodes-toggle {
   margin-top: 10px;
@@ -627,7 +620,28 @@ h1 {
 }
 .filters-toggle.filters-invalid {
   color: var(--red);
-  border-color: #9a443d;
+  border-color: rgba(154, 68, 61, 0.72);
+  isolation: isolate;
+  overflow: visible;
+}
+.filters-toggle.filters-invalid::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(201, 79, 69, 0.28) 0%,
+    rgba(201, 79, 69, 0.14) 38%,
+    rgba(201, 79, 69, 0.055) 62%,
+    transparent 78%
+  );
+  filter: blur(4px);
+  opacity: 0;
+  transform: scale(0.97);
+  pointer-events: none;
+  z-index: -1;
+  animation: filterPulse 2.4s ease-in-out infinite;
 }
 .filters-toggle.filters-invalid .filters-toggle-icon {
   color: var(--red);
@@ -635,29 +649,30 @@ h1 {
 .filters-toggle.filters-invalid .filters-active-indicator {
   display: none;
 }
-.filters-toggle.filters-invalid::after,
-.segmented.filter-empty::after {
+.segmented.filter-empty {
+  position: relative;
+  isolation: isolate;
+  color: var(--red) !important;
+  border-color: rgba(154, 68, 61, 0.72) !important;
+}
+.segmented.filter-empty::before {
   content: "";
   position: absolute;
-  inset: -7px;
+  inset: -5px;
   border-radius: inherit;
   background: radial-gradient(
     ellipse at center,
     rgba(201, 79, 69, 0.24) 0%,
     rgba(201, 79, 69, 0.12) 38%,
-    rgba(201, 79, 69, 0) 72%
+    rgba(201, 79, 69, 0.045) 62%,
+    transparent 78%
   );
   filter: blur(4px);
   opacity: 0;
-  z-index: -1;
+  transform: scale(0.97);
   pointer-events: none;
-  animation: filterPulse 1.6s ease-in-out infinite;
-}
-.segmented.filter-empty {
-  position: relative;
-  isolation: isolate;
-  color: var(--red) !important;
-  border-color: #9a443d !important;
+  z-index: -1;
+  animation: filterPulse 2.4s ease-in-out infinite;
 }
 .segmented.filter-empty .filter-label {
   color: var(--red) !important;
@@ -666,17 +681,18 @@ h1 {
   0%,
   100% {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.97);
   }
   50% {
     opacity: 1;
-    transform: scale(1.02);
+    transform: scale(1.015);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .filters-toggle.filters-invalid,
-  .filter-empty {
+  .filters-toggle.filters-invalid::before,
+  .segmented.filter-empty::before {
     animation: none;
+    opacity: 0;
   }
 }
 .jump-highlight {
@@ -841,10 +857,6 @@ footer {
   .title {
     font-size: 16px;
   }
-  .status-mark {
-    width: 18px;
-    flex-basis: 18px;
-  }
 }
 
 @media (min-width: 996px) {
@@ -888,11 +900,6 @@ footer {
   }
   .title-line {
     display: block;
-  }
-  .status-mark {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 4px;
   }
   .badge {
     display: inline-block;

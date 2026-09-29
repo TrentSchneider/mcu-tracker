@@ -343,10 +343,10 @@ function render() {
   visible.forEach(item => {
     const row = document.createElement("article");
     const status = statusForDisplay(item);
-    row.dataset.itemId = item.id;
-    row.className = `item status-${status}`;
-    const summary = item.type === "show" ? episodeSummary(item) : null;
     const expanded = state.expandedSeasons.has(item.id);
+    row.dataset.itemId = item.id;
+    row.className = `item status-${status}${expanded ? " episodes-expanded" : ""}`;
+    const summary = item.type === "show" ? episodeSummary(item) : null;
     const hasEpisodes = item.type === "show" && item.episodeCount > 0;
     const episodeMeta =
       summary && summary.tracked > 0
@@ -362,7 +362,6 @@ function render() {
     row.innerHTML = `
       <div class="item-main">
         <div class="title-line">
-          <div class="status-mark" aria-hidden="true">${statusIcon(status)}</div>
           <div class="title">${escapeHTML(item.title)}</div>
           <span class="badge ${item.type}">${item.type === "movie" ? "Movie" : "Show"}</span>
         </div>
