@@ -1,4 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap");
+@font-face {
+  font-family: "DM Sans";
+  src: url("assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("assets/fonts/Playfair/Playfair-VariableFont_opsz,wdth,wght.ttf")
+    format("truetype");
+  font-style: normal;
+  font-stretch: 87.5% 112.5%;
+  font-weight: 300 900;
+  font-display: swap;
+}
 
 :root {
   --bg: #10100f;
