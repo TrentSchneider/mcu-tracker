@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#10100f" />
+    <meta name="application-version" content="v22" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
@@ -16,9 +17,128 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="MCU Tracker" />
     <title>MCU Tracker</title>
+    <style>
+      html,
+      body {
+        background: #10100f;
+      }
+      #app-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            ellipse at 50% 38%,
+            rgba(217, 181, 109, 0.12),
+            transparent 42%
+          ),
+          #10100f;
+        color: #eee9df;
+        opacity: 1;
+        visibility: visible;
+        transition:
+          opacity 0.28s ease,
+          visibility 0.28s ease;
+        padding: max(24px, env(safe-area-inset-top)) 24px
+          max(24px, env(safe-area-inset-bottom));
+      }
+      #app-splash.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      #app-splash .splash-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        text-align: center;
+      }
+      #app-splash .splash-mark {
+        width: 66px;
+        height: 66px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #8d7549;
+        box-shadow:
+          inset 0 0 0 4px #10100f,
+          inset 0 0 0 5px #6f6047;
+        color: #d9b56d;
+        font:
+          800 35px/1 Georgia,
+          serif;
+        transform: rotate(45deg);
+      }
+      #app-splash .splash-mark span {
+        transform: rotate(-45deg);
+      }
+      #app-splash .splash-title {
+        margin: 8px 0 0;
+        font:
+          600 28px/1.15 Georgia,
+          serif;
+        letter-spacing: 0.01em;
+      }
+      #app-splash .splash-subtitle {
+        width: min(100%, 220px);
+        margin: 0;
+        color: #a8a297;
+        font:
+          10px/1.6 system-ui,
+          sans-serif;
+        letter-spacing: 0.16em;
+        word-spacing: 0.28em;
+        text-align: center;
+        text-wrap: balance;
+        text-transform: uppercase;
+      }
+      #app-splash .splash-loader {
+        width: 86px;
+        height: 2px;
+        margin-top: 13px;
+        overflow: hidden;
+        background: #33322e;
+      }
+      #app-splash .splash-loader::after {
+        content: "";
+        display: block;
+        width: 40%;
+        height: 100%;
+        background: #d9b56d;
+        animation: splash-loading 1.15s ease-in-out infinite;
+      }
+      @keyframes splash-loading {
+        from {
+          transform: translateX(-110%);
+        }
+        to {
+          transform: translateX(260%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #app-splash {
+          transition: none;
+        }
+        #app-splash .splash-loader::after {
+          animation: none;
+          width: 100%;
+        }
+      }
+    </style>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id="app-splash" role="status" aria-label="Loading MCU Tracker">
+      <div class="splash-content">
+        <div class="splash-mark" aria-hidden="true"><span>M</span></div>
+        <p class="splash-subtitle">Marvel Cinematic Universe</p>
+        <h1 class="splash-title">MCU Tracker</h1>
+        <div class="splash-loader" aria-hidden="true"></div>
+      </div>
+    </div>
     <div class="grain"></div>
     <header class="site-header">
       <div class="brand">
@@ -176,6 +296,21 @@
       <span>Progress is stored locally in IndexedDB.</span>
     </footer>
 
+    <script>
+      (() => {
+        const splash = document.getElementById("app-splash");
+        let dismissed = false;
+        const dismiss = () => {
+          if (dismissed || !splash) return;
+          dismissed = true;
+          splash.classList.add("is-hidden");
+          window.setTimeout(() => splash.remove(), 350);
+        };
+        window.addEventListener("mcu-tracker-ready", dismiss, { once: true });
+        // Fail open if IndexedDB or app initialization takes unusually long.
+        window.setTimeout(dismiss, 12000);
+      })();
+    </script>
     <script src="data.js"></script>
     <script src="episodes.js"></script>
     <script src="app.js"></script>

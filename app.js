@@ -1,8 +1,11 @@
+const APP_VERSION = "v20";
 const DB_NAME = "mcu-tracker";
 const DB_VERSION = 3;
 const STORE = "progress";
 const SETTINGS_STORE = "settings";
 const SETTINGS_KEY = "ui";
+
+console.info(`[MCU Tracker] ${APP_VERSION}`);
 
 const state = {
   type: ["movie", "show"],
@@ -605,4 +608,5 @@ setupContinueWatching();
   setFiltersToggle(state.filtersOpen);
   updateStats();
   render();
+  window.dispatchEvent(new Event("mcu-tracker-ready"));
 })();
