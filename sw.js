@@ -1,4 +1,4 @@
-const CACHE_NAME = "mcu-tracker-v22";
+const CACHE_NAME = "mcu-tracker-v23";
 
 const APP_SHELL = [
   "./",
@@ -10,6 +10,14 @@ const APP_SHELL = [
   "./manifest.webmanifest",
   "./favicon.svg",
   "./apple-touch-icon.png",
+  "./assets/startup/launch-1179x2556.png",
+  "./assets/startup/launch-1206x2622.png",
+  "./assets/startup/launch-1290x2796.png",
+  "./assets/startup/launch-1320x2868.png",
+  "./assets/startup/launch-1242x2688.png",
+  "./assets/startup/launch-1125x2436.png",
+  "./assets/startup/launch-1170x2532.png",
+  "./assets/startup/launch-1284x2778.png",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png",
   "./assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf",

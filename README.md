@@ -62,7 +62,7 @@ Legacy television seasons often span multiple MCU film events, so their story-or
 
 ## PWA
 
-The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v22`.
+The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v23`.
 
 The service worker uses a network-first strategy for navigation so an available newer `index.html` can be picked up, while the versioned cache provides the complete app shell for offline use. Installing a new application version does not affect the `mcu-tracker` IndexedDB database or saved progress.
 
@@ -73,3 +73,9 @@ The initial splash screen is rendered from critical inline styles before the mai
 ### v22 splash subtitle
 
 The splash-screen subtitle now has clearer word spacing and a constrained width so “Marvel Cinematic Universe” can wrap cleanly across words on narrow screens.
+
+### v23 iOS startup images
+
+Added eight static portrait startup images and matching `apple-touch-startup-image` declarations for common iPhone screen sizes. These images are intended to display during the iOS Home Screen app launch phase before the HTML splash and application code render. The startup images are also included in the v23 service-worker app-shell cache for offline availability. The existing HTML splash remains in place to cover app initialization after the page begins rendering.
+
+Startup-image selection depends on iOS and the installed Home Screen web app. If the installed app continues to show its previous launch appearance, test the updated site in Safari first. Avoid removing/reinstalling the Home Screen app until saved progress has been backed up, because deleting an installed web app may affect its local browser storage.
