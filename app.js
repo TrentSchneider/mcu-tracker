@@ -507,6 +507,45 @@ function setupContinueWatching() {
   });
 }
 
+function setupSettingsMenu() {
+  const toggle = document.getElementById("settingsToggle");
+  const menu = document.getElementById("settingsMenu");
+  const reset = document.getElementById("resetBtn");
+  if (!toggle || !menu || !reset) return;
+
+  const setOpen = open => {
+    toggle.setAttribute("aria-expanded", String(open));
+    menu.hidden = !open;
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(menu.hidden);
+  });
+  document.addEventListener("click", event => {
+    if (!menu.contains(event.target) && !toggle.contains(event.target))
+      setOpen(false);
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !menu.hidden) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+  reset.addEventListener("click", async () => {
+    setOpen(false);
+    if (
+      confirm("Reset all MCU progress in this browser? This cannot be undone.")
+    ) {
+      await clearProgress();
+      state.progress.clear();
+      state.manualCompleted.clear();
+      await saveSettings();
+      updateStats();
+      render();
+    }
+  });
+}
+
 function bindSearch(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -559,19 +598,10 @@ document.getElementById("sort").addEventListener("change", e => {
   render();
   saveSettings();
 });
-document.getElementById("resetBtn").addEventListener("click", async () => {
-  if (
-    confirm("Reset all MCU progress in this browser? This cannot be undone.")
-  ) {
-    await clearProgress();
-    state.progress.clear();
-    updateStats();
-    render();
-  }
-});
 
 setupFiltersToggle();
 setupContinueWatching();
+setupSettingsMenu();
 
 (async () => {
   const [progress, settings] = await Promise.all([

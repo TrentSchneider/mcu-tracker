@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#10100f" />
-    <meta name="application-version" content="v23" />
+    <meta name="application-version" content="v26" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
@@ -190,9 +190,44 @@
         </div>
       </div>
       <div class="header-actions">
-        <button id="resetBtn" class="text-button" type="button">
-          Reset progress
+        <button
+          id="settingsToggle"
+          class="settings-toggle"
+          type="button"
+          aria-label="Settings"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="settingsMenu"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <g transform="translate(0 1.3)">
+              <circle cx="12.1" cy="10.2" r="3.5" />
+              <path
+                d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3 .9v.2a1.8 1.8 0 1 1-3.6 0v-.2a1.8 1.8 0 0 0-3-.9l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-.9-3h-.2a1.8 1.8 0 1 1 0-3.6h.2a1.8 1.8 0 0 0 .9-3l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3-.9v-.2a1.8 1.8 0 1 1 3.6 0v.2a1.8 1.8 0 0 0 3 .9l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 .9 3h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-.9 3Z"
+              />
+            </g>
+          </svg>
         </button>
+        <div
+          id="settingsMenu"
+          class="settings-menu"
+          role="dialog"
+          aria-label="Settings"
+          hidden
+        >
+          <h2>Settings</h2>
+          <button id="resetBtn" class="settings-action" type="button">
+            Reset progress
+          </button>
+        </div>
       </div>
     </header>
 

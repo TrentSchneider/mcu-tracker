@@ -114,19 +114,74 @@ h1 {
   font: 700 22px "Playfair Display";
   margin: 0;
 }
-.text-button {
-  background: none;
-  border: 0;
+.header-actions {
+  position: relative;
+}
+.settings-toggle {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: #171715;
   color: var(--muted);
   cursor: pointer;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
 }
-.text-button:hover {
+.settings-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+.settings-toggle:hover,
+.settings-toggle[aria-expanded="true"] {
   color: var(--ink);
+  border-color: #5a554a;
+  background: #22211d;
+}
+.settings-toggle:focus-visible,
+.settings-action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.settings-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 50;
+  width: min(250px, calc(100vw - 36px));
+  padding: 14px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.settings-menu[hidden] {
+  display: none;
+}
+.settings-menu h2 {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.settings-action {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(201, 79, 69, 0.35);
+  background: rgba(201, 79, 69, 0.08);
+  color: #e58b82;
+  font: 600 12px "DM Sans", system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+.settings-action:hover {
+  border-color: rgba(201, 79, 69, 0.7);
+  background: rgba(201, 79, 69, 0.14);
+  color: #f0aaa2;
 }
 .wrap {
   max-width: 1180px;
@@ -929,9 +984,6 @@ footer {
   }
   .brand .eyebrow {
     display: none;
-  }
-  .header-actions {
-    font-size: 10px;
   }
   .title-line {
     display: block;

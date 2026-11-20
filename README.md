@@ -36,7 +36,9 @@ Edit `data.js`. Each entry has:
 
 Add future titles by appending an object with a new ID.
 
-## Storage
+## Settings and storage
+
+Open the header's settings menu to reset all saved progress. The reset requires confirmation and leaves filter and sorting preferences unchanged.
 
 Progress is stored in the browser's IndexedDB database named `mcu-tracker`, in the `progress` object store. It is local to the browser/origin and requires no account or server.
 
@@ -62,7 +64,7 @@ Legacy television seasons often span multiple MCU film events, so their story-or
 
 ## PWA
 
-The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v23`.
+The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v26`.
 
 The service worker uses a network-first strategy for navigation so an available newer `index.html` can be picked up, while the versioned cache provides the complete app shell for offline use. Installing a new application version does not affect the `mcu-tracker` IndexedDB database or saved progress.
 
