@@ -38,7 +38,9 @@ Add future titles by appending an object with a new ID.
 
 ## Settings and storage
 
-Open the header's settings menu to reset all saved progress. The reset requires confirmation and leaves filter and sorting preferences unchanged.
+Open the header's settings menu to include or exclude Legacy titles from the list, overall progress, and Continue Watching. Legacy titles are included by default; hiding them preserves their saved progress. The setting is stored locally and does not change the behavior of the type, status, or search filters.
+
+The settings menu also lets you reset all saved progress. The reset requires confirmation and leaves filter, sorting, and Legacy preferences unchanged.
 
 Progress is stored in the browser's IndexedDB database named `mcu-tracker`, in the `progress` object store. It is local to the browser/origin and requires no account or server.
 
@@ -64,7 +66,7 @@ Legacy television seasons often span multiple MCU film events, so their story-or
 
 ## PWA
 
-The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v26`.
+The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v28`.
 
 The service worker uses a network-first strategy for navigation so an available newer `index.html` can be picked up, while the versioned cache provides the complete app shell for offline use. Installing a new application version does not affect the `mcu-tracker` IndexedDB database or saved progress.
 

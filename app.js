@@ -1,4 +1,4 @@
-const APP_VERSION = "v20";
+const APP_VERSION = "v28";
 const DB_NAME = "mcu-tracker";
 const DB_VERSION = 3;
 const STORE = "progress";
@@ -13,6 +13,7 @@ const state = {
   search: "",
   sort: "release",
   filtersOpen: false,
+  includeLegacy: true,
   progress: new Map(),
   expandedSeasons: new Set(),
   manualCompleted: new Set()
@@ -101,6 +102,7 @@ async function saveSettings() {
         status: state.status,
         sort: state.sort,
         filtersOpen: state.filtersOpen,
+        includeLegacy: state.includeLegacy,
         manualCompleted: [...state.manualCompleted]
       },
       SETTINGS_KEY
@@ -162,8 +164,14 @@ function statusForDisplay(item) {
   return item.type === "show" ? derivedSeasonStatus(item) : itemStatus(item.id);
 }
 
+function includedItems() {
+  return MCU_ITEMS.filter(
+    item => state.includeLegacy || item.phaseLabel !== "Legacy"
+  );
+}
+
 function filteredItems() {
-  const filtered = MCU_ITEMS.filter(item => {
+  const filtered = includedItems().filter(item => {
     const typeOK = state.type.includes(item.type);
     const itemState = statusForDisplay(item);
     const statusOK = state.status.includes(itemState);
@@ -411,16 +419,17 @@ function render() {
 }
 
 function updateStats() {
-  const total = MCU_ITEMS.length;
-  const done = MCU_ITEMS.filter(
+  const items = includedItems();
+  const total = items.length;
+  const done = items.filter(
     item => statusForDisplay(item) === "watched"
   ).length;
-  const inProgress = MCU_ITEMS.filter(
+  const inProgress = items.filter(
     item => statusForDisplay(item) === "in-progress"
   ).length;
-  const pct = total ? Math.round((done / total) * 100) : 0;
+  const pct = total ? (done / total) * 100 : 0;
   document.getElementById("progressText").textContent = `${done} / ${total}`;
-  document.getElementById("percentText").textContent = `${pct}%`;
+  document.getElementById("percentText").textContent = `${Math.round(pct)}%`;
   document.getElementById("remainingText").textContent =
     `${total - done} remaining`;
   document.getElementById("progressBar").style.width = pct + "%";
@@ -433,7 +442,7 @@ function updateStats() {
 }
 
 function renderContinueWatching() {
-  const items = MCU_ITEMS.filter(
+  const items = includedItems().filter(
     item => statusForDisplay(item) === "in-progress"
   );
   const countEl = document.getElementById("continueCount");
@@ -511,7 +520,8 @@ function setupSettingsMenu() {
   const toggle = document.getElementById("settingsToggle");
   const menu = document.getElementById("settingsMenu");
   const reset = document.getElementById("resetBtn");
-  if (!toggle || !menu || !reset) return;
+  const includeLegacy = document.getElementById("includeLegacy");
+  if (!toggle || !menu || !reset || !includeLegacy) return;
 
   const setOpen = open => {
     toggle.setAttribute("aria-expanded", String(open));
@@ -529,6 +539,25 @@ function setupSettingsMenu() {
     if (event.key === "Escape" && !menu.hidden) {
       setOpen(false);
       toggle.focus();
+    }
+  });
+  includeLegacy.addEventListener("change", async () => {
+    const previous = state.includeLegacy;
+    state.includeLegacy = includeLegacy.checked;
+    includeLegacy.disabled = true;
+    updateStats();
+    render();
+    try {
+      await saveSettings();
+    } catch (error) {
+      console.error("[MCU Tracker] Could not save Legacy setting", error);
+      state.includeLegacy = previous;
+      includeLegacy.checked = previous;
+      updateStats();
+      render();
+      alert("Could not save the Legacy setting. Please try again.");
+    } finally {
+      includeLegacy.disabled = false;
     }
   });
   reset.addEventListener("click", async () => {
@@ -629,11 +658,14 @@ setupSettingsMenu();
           : ["unwatched", "in-progress", "watched"];
   state.sort = settings.sort || "release";
   state.filtersOpen = Boolean(settings.filtersOpen);
+  state.includeLegacy = settings.includeLegacy !== false;
   state.manualCompleted = new Set(
     Array.isArray(settings.manualCompleted) ? settings.manualCompleted : []
   );
 
   updateFilterUI();
+  document.getElementById("includeLegacy").checked = state.includeLegacy;
+  document.getElementById("includeLegacy").disabled = false;
   document.getElementById("sort").value = state.sort;
   setFiltersToggle(state.filtersOpen);
   updateStats();

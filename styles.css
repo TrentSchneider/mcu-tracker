@@ -168,6 +168,29 @@ h1 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+.settings-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 10px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.settings-option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.settings-option input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
 .settings-action {
   width: 100%;
   padding: 10px;
