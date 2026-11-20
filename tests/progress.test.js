@@ -4,7 +4,7 @@ const path = require("node:path");
 const test = require("node:test");
 const vm = require("node:vm");
 
-function createApp() {
+function createApp(items) {
   const elements = new Map();
   const documentHandlers = {};
   const infoWrapper = {
@@ -52,7 +52,7 @@ function createApp() {
     }
   };
   const context = vm.createContext({ document, console });
-  context.MCU_ITEMS = [
+  context.MCU_ITEMS = items || [
     ...Array.from({ length: 64 }, (_, i) => ({ id: `regular-${i}`, type: "movie" })),
     ...Array.from({ length: 30 }, (_, i) => ({
       id: `legacy-${i}`,
@@ -149,4 +149,50 @@ test("Legacy info supports hover, activation, dismissal, and reopening", () => {
   assert.equal(text.hidden, true);
   app.element("settingsToggle").click();
   assert.equal(text.hidden, true);
+});
+
+test("Legacy setting excludes only older shows outside Marvel's published timeline", async () => {
+  const root = path.join(__dirname, "..");
+  const data = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(root, "data.js"), "utf8"), data);
+  vm.runInNewContext(fs.readFileSync(path.join(root, "episodes.js"), "utf8"), data);
+  const items = data.window.MCU_ITEMS;
+  const legacyIds = [
+    ...Array.from({ length: 9 }, (_, i) => `series-${22 + i}`),
+    ...Array.from({ length: 6 }, (_, i) => `series-${44 + i}`)
+  ];
+  const timelineIds = [
+    ...Array.from({ length: 13 }, (_, i) => `series-${31 + i}`),
+    "series-50",
+    "series-51"
+  ];
+  assert.deepEqual(
+    Array.from(items.filter(item => item.phaseLabel === "Legacy"), item => item.id),
+    legacyIds
+  );
+  for (const id of timelineIds) {
+    const item = items.find(entry => entry.id === id);
+    assert.ok(item, `missing ${id}`);
+    assert.notEqual(item.phaseLabel, "Legacy", item.title);
+    assert.equal(item.phaseOrder, item.phase * 1000 + item.order);
+    assert.equal(data.window.MCU_EPISODE_TITLES[id].length, item.episodeCount);
+  }
+
+  const app = createApp(items);
+  app.run(`
+    state.progress.set("series-31", "watched");
+    state.progress.set("series-24", "watched");
+    updateStats();
+  `);
+  app.element("includeLegacy").checked = false;
+  await app.element("includeLegacy").change();
+  const visibleIds = Array.from(app.run("includedItems()"), item => item.id);
+  for (const id of timelineIds) assert.ok(visibleIds.includes(id), id);
+  for (const id of legacyIds) assert.ok(!visibleIds.includes(id), id);
+  assert.equal(app.element("progressText").textContent, `1 / ${items.length - legacyIds.length}`);
+  assert.equal(app.run('state.progress.get("series-24")'), "watched");
+
+  app.element("includeLegacy").checked = true;
+  await app.element("includeLegacy").change();
+  assert.equal(app.element("progressText").textContent, `2 / ${items.length}`);
 });

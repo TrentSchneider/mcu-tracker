@@ -1,4 +1,4 @@
-const APP_VERSION = "v29";
+const APP_VERSION = "v30";
 const DB_NAME = "mcu-tracker";
 const DB_VERSION = 3;
 const STORE = "progress";

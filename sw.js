@@ -1,4 +1,4 @@
-const CACHE_NAME = "mcu-tracker-v29";
+const CACHE_NAME = "mcu-tracker-v30";
 
 const APP_SHELL = [
   "./",

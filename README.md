@@ -33,6 +33,7 @@ Edit `data.js`. Each entry has:
 - `releaseDate`: ISO date (`YYYY-MM-DD`) used by Release Date sorting
 - `storyOrder`: numeric in-universe ordering used by Chronological / Story sorting
 - `phaseOrder`: generated from phase + catalog order for Phase sorting
+- `phaseLabel` (optional): display label, including `Legacy` for the older shows excluded by the Legacy setting
 
 Add future titles by appending an object with a new ID.
 
@@ -48,9 +49,9 @@ Progress is stored in the browser's IndexedDB database named `mcu-tracker`, in t
 
 ## Scope
 
-This version treats the MCU checklist at the feature-film + season/series level. Marvel Studios shorts, One-Shots and Special Presentations are intentionally omitted because the requested UI has Movie/Show filters. The catalog can be extended later if desired.
+This version treats the MCU checklist at the feature-film + season/series level. One-Shots and Special Presentations are intentionally omitted because the requested UI has Movie/Show filters; the two seasons of I Am Groot shorts are included as shows. The catalog can be extended later if desired.
 
-The catalog was assembled against Marvel's current MCU movie/TV listings and the current MCU timeline landscape as of September 2026. Release dates and MCU continuity can change; `data.js` is deliberately separated so the list can be maintained without touching the UI.
+The catalog was assembled against Marvel's MCU movie/TV listings and timeline. Release dates and MCU continuity can change; `data.js` is deliberately separated so the list can be maintained without touching the UI.
 
 ## App icon
 
@@ -60,7 +61,7 @@ so iOS uses it instead of falling back to the first letter of the page title.
 
 ## Expanded show coverage
 
-The show catalog includes Agent Carter, Agents of SHIELD, the Netflix/Defenders Saga (Daredevil, Jessica Jones, Luke Cage, Iron Fist, The Defenders, and The Punisher), Inhumans, Runaways, Cloak & Dagger, and I Am Groot in addition to the Marvel Studios/Disney+ series. These legacy Marvel Television entries are labeled **Legacy** rather than assigned a numbered MCU Phase.
+The **Legacy** label covers Agent Carter, Agents of SHIELD, Inhumans, Runaways, and Cloak & Dagger: older Marvel Television shows not listed in [Marvel's published MCU timeline](https://www.marvel.com/articles/movies/mcu-timeline-order-disney-plus). Their absence does not settle their continuity status. The timeline includes all seasons of the Netflix/Defenders Saga and I Am Groot, so they are not Legacy. Defenders Saga seasons use that label rather than an official phase label; their phase sort placement follows their release era.
 
 ### Chronological sorting note
 
@@ -68,7 +69,7 @@ Legacy television seasons often span multiple MCU film events, so their story-or
 
 ## PWA
 
-The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v29`.
+The tracker includes a Web App Manifest, install icons, locally bundled variable fonts, and a service worker with versioned application-shell caching. The current application-shell cache is `mcu-tracker-v30`.
 
 The service worker uses a network-first strategy for navigation so an available newer `index.html` can be picked up, while the versioned cache provides the complete app shell for offline use. Installing a new application version does not affect the `mcu-tracker` IndexedDB database or saved progress.
 
