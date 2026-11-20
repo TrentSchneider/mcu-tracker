@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#10100f" />
-    <meta name="application-version" content="v28" />
+    <meta name="application-version" content="v29" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
@@ -224,10 +224,33 @@
           hidden
         >
           <h2>Settings</h2>
-          <label class="settings-option">
-            <span>Include Legacy titles</span>
+          <div class="settings-option">
+            <label for="includeLegacy">Include Legacy titles</label>
+            <span class="settings-info">
+              <button
+                id="legacyInfo"
+                class="settings-info-button"
+                type="button"
+                aria-label="About Legacy titles"
+                aria-describedby="legacyInfoText"
+                aria-expanded="false"
+              >
+                <span aria-hidden="true">i</span>
+              </button>
+              <span
+                id="legacyInfoText"
+                class="settings-tooltip"
+                role="tooltip"
+                hidden
+              >
+                Legacy titles are Marvel Television shows listed outside the
+                numbered MCU phases, such as Agents of SHIELD and Daredevil.
+                Turn this off to hide them from the list, overall progress,
+                and Continue Watching. Their saved progress is kept.
+              </span>
+            </span>
             <input id="includeLegacy" type="checkbox" checked disabled />
-          </label>
+          </div>
           <button id="resetBtn" class="settings-action" type="button">
             Reset progress
           </button>

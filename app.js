@@ -1,4 +1,4 @@
-const APP_VERSION = "v28";
+const APP_VERSION = "v29";
 const DB_NAME = "mcu-tracker";
 const DB_VERSION = 3;
 const STORE = "progress";
@@ -521,24 +521,57 @@ function setupSettingsMenu() {
   const menu = document.getElementById("settingsMenu");
   const reset = document.getElementById("resetBtn");
   const includeLegacy = document.getElementById("includeLegacy");
-  if (!toggle || !menu || !reset || !includeLegacy) return;
+  const legacyInfo = document.getElementById("legacyInfo");
+  const legacyInfoText = document.getElementById("legacyInfoText");
+  if (!toggle || !menu || !reset || !includeLegacy || !legacyInfo || !legacyInfoText)
+    return;
+
+  let infoPinned = false;
+  const setInfoOpen = open => {
+    legacyInfo.setAttribute("aria-expanded", String(open));
+    legacyInfoText.hidden = !open;
+  };
 
   const setOpen = open => {
     toggle.setAttribute("aria-expanded", String(open));
     menu.hidden = !open;
+    if (!open) {
+      infoPinned = false;
+      setInfoOpen(false);
+    }
   };
 
+  legacyInfo.parentElement.addEventListener("pointerenter", event => {
+    if (event.pointerType === "mouse") setInfoOpen(true);
+  });
+  legacyInfo.parentElement.addEventListener("pointerleave", event => {
+    if (event.pointerType === "mouse" && !infoPinned) setInfoOpen(false);
+  });
+  legacyInfo.addEventListener("click", () => {
+    infoPinned = !infoPinned;
+    setInfoOpen(infoPinned);
+  });
   toggle.addEventListener("click", () => {
     setOpen(menu.hidden);
   });
   document.addEventListener("click", event => {
     if (!menu.contains(event.target) && !toggle.contains(event.target))
       setOpen(false);
+    else if (!legacyInfo.parentElement.contains(event.target)) {
+      infoPinned = false;
+      setInfoOpen(false);
+    }
   });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && !menu.hidden) {
-      setOpen(false);
-      toggle.focus();
+      if (!legacyInfoText.hidden) {
+        infoPinned = false;
+        setInfoOpen(false);
+        legacyInfo.focus();
+      } else {
+        setOpen(false);
+        toggle.focus();
+      }
     }
   });
   includeLegacy.addEventListener("change", async () => {

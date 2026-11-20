@@ -6,6 +6,17 @@ const vm = require("node:vm");
 
 function createApp() {
   const elements = new Map();
+  const documentHandlers = {};
+  const infoWrapper = {
+    handlers: {},
+    addEventListener(type, handler) {
+      this.handlers[type] = handler;
+    },
+    contains(target) {
+      return target === this || target === elements.get("legacyInfo") ||
+        target === elements.get("legacyInfoText");
+    }
+  };
   const document = {
     getElementById(id) {
       if (!elements.has(id)) {
@@ -16,6 +27,18 @@ function createApp() {
           checked: true,
           disabled: false,
           hidden: true,
+          attributes: {},
+          parentElement: id === "legacyInfo" ? infoWrapper : null,
+          setAttribute(name, value) {
+            this.attributes[name] = value;
+          },
+          contains(target) {
+            return target === this || (id === "settingsMenu" &&
+              (infoWrapper.contains(target) || target === elements.get("includeLegacy")));
+          },
+          focus() {
+            document.activeElement = this;
+          },
           addEventListener(type, handler) {
             this[type] = handler;
           },
@@ -24,7 +47,9 @@ function createApp() {
       }
       return elements.get(id);
     },
-    addEventListener() {}
+    addEventListener(type, handler) {
+      documentHandlers[type] = handler;
+    }
   };
   const context = vm.createContext({ document, console });
   context.MCU_ITEMS = [
@@ -48,6 +73,9 @@ function createApp() {
   );
   return {
     element: id => document.getElementById(id),
+    infoWrapper,
+    document,
+    documentHandlers,
     run: code => vm.runInContext(code, context)
   };
 }
@@ -88,4 +116,37 @@ test("hiding the only watched Legacy title empties the bar", async () => {
   await app.element("includeLegacy").change();
   assert.equal(app.element("progressText").textContent, "0 / 64");
   assert.equal(app.element("progressBar").style.width, "0%");
+});
+
+test("Legacy info supports hover, activation, dismissal, and reopening", () => {
+  const app = createApp();
+  const info = app.element("legacyInfo");
+  const text = app.element("legacyInfoText");
+  app.element("settingsToggle").click();
+
+  app.infoWrapper.handlers.pointerenter({ pointerType: "mouse" });
+  assert.equal(text.hidden, false);
+  app.infoWrapper.handlers.pointerleave({ pointerType: "mouse" });
+  assert.equal(text.hidden, true);
+
+  app.infoWrapper.handlers.pointerenter({ pointerType: "touch" });
+  assert.equal(text.hidden, true);
+  info.click();
+  assert.equal(text.hidden, false);
+  assert.equal(info.attributes["aria-expanded"], "true");
+  app.infoWrapper.handlers.pointerleave({ pointerType: "mouse" });
+  assert.equal(text.hidden, false);
+
+  app.documentHandlers.keydown({ key: "Escape" });
+  assert.equal(text.hidden, true);
+  assert.equal(app.document.activeElement, info);
+  assert.equal(app.element("settingsMenu").hidden, false);
+  info.click();
+  app.documentHandlers.click({ target: app.element("includeLegacy") });
+  assert.equal(text.hidden, true);
+  info.click();
+  app.element("settingsToggle").click();
+  assert.equal(text.hidden, true);
+  app.element("settingsToggle").click();
+  assert.equal(text.hidden, true);
 });
